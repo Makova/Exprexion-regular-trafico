@@ -244,10 +244,12 @@ def search(config,query):
         if hasattr(s, "retweeted_status"):
             print text_color(config,"Strong") + unicode(s.user.screen_name) + text_color(config,"Normal") + " " + "[" + unicode(s.id) + "]" + " << " + unicode(s.retweeted_status.user.screen_name) + " (" + unicode(s.created_at) + ")" + "\n" + unicode(s.retweeted_status.text)
         else:
-        	if re.search(r'\#RETENCI[OÓ]NE?S?\sn?i?v?e?l?\s?(\w+)[\s\w\/ÁÉÍÓÚáéíóúÇç]+\#(\w+)\s\(pk\s([\d\.]*)\sal\s([\d\.]*)\s(\w+)\)\s([\s\w\/\-ÁÉÍÓÚáéíóúÇç]+)\s\#DGT(\w+)',s.text):
+
+
+
 
         
-        		print text_color(config,"Strong") + unicode(s.user.screen_name) + text_color(config,"Normal") + " " + "[" + unicode(s.id) + "]" + " (" + unicode(s.created_at) + ")" + "\n" + unicode(s.text)
+            print text_color(config,"Strong") + unicode(s.user.screen_name) + text_color(config,"Normal") + " " + "[" + unicode(s.id) + "]" + " (" + unicode(s.created_at) + ")" + "\n" + unicode(s.text)
 
 	
 
@@ -258,6 +260,11 @@ def show_user(config,user,view_details_user=0):
     api = login_api(config)
 
     s = api.get_user(user)
+
+#    r'\#RETENCI[OÓ]NE?S?\sn?i?v?e?l?\s?(\w+)[\s\w\/ÁÉÍÓÚáéíóúÇç]+\#(\w+)\s\(pk\s([\d\.]*)\sal\s([\d\.]*)\s(\w+)\)\s([\s\w\/\-ÁÉÍÓÚáéíóúÇç]+)\s\#DGT(\w+)'
+
+    traffic_regexp = u'\#RETENCI[OÓ]NE?S?\sn?i?v?e?l?\s?(\w+)[\s\w\/ÁÉÍÓÚáéíóúÇç]+\#(\w+)\s\(pk\s([\d\.]*)\sal\s([\d\.]*)\s(\w+)\)\s([\s\w\/\-ÁÉÍÓÚáéíóúÇç]+)\s\#DGT(\w+)'
+
 
     if view_details_user == 1:
         print text_color(config,"Strong") + unicode(user) + text_color(config,"Normal") + " " + "[" + unicode(s.id) + "] (" + unicode(s.created_at) + ")"
@@ -276,8 +283,7 @@ def show_user(config,user,view_details_user=0):
                 print text_color(config,"Strong") + unicode(s.user.screen_name) + text_color(config,"Normal") + " " + "[" + unicode(s.id) + "]" + " << " + unicode(s.retweeted_status.user.screen_name) + " (" + unicode(s.created_at) + ")" + "\n" + unicode(s.retweeted_status.text)
             else:
             
-            	if re.search(r'\#RETENCI[OÓ]NE?S?\sn?i?v?e?l?\s?(\w+)[\s\w\/ÁÉÍÓÚáéíóúÇç]+\#(\w+)\s\(pk\s([\d\.]*)\sal\s([\d\.]*)\s(\w+)\)\s([\s\w\/\-ÁÉÍÓÚáéíóúÇç]+)\s\#DGT(\w+)',s.text):
-
+            	if re.search(traffic_regexp,s.text):
             
             	    print text_color(config,"Strong") + unicode(s.user.screen_name) + text_color(config,"Normal") + " " + "[" + unicode(s.id) + "]" + " (" + unicode(s.created_at) + ")" + "\n" + unicode(s.text)
     else:
